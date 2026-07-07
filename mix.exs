@@ -44,6 +44,7 @@ defmodule OddittApiClient.Mixfile do
    defp package do
       [
         name: "odditt_api_client",
+        licenses: ["MIT"],
         files: ~w(.formatter.exs config lib mix.exs README* LICENSE*),
       ]
   end
