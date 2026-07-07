@@ -25,6 +25,26 @@ end
 Documentation can be generated with [ExDoc][] and published on [HexDocs][]. Once published, the docs can be found at
 [https://hexdocs.pm/odditt_api_client][docs].
 
+## Authentication
+
+You authenticate with **either** an API key **or** OAuth client credentials — you
+do not supply a Bearer token yourself. `AuthSession` exchanges your credential for
+a short-lived Bearer JWT (via `POST /v1/auth/login` or `POST /v1/oauth/login`) and
+refreshes it as needed. A session is a small process; call `connection/1` to get a
+`Tesla` connection carrying a valid Bearer token:
+
+```elixir
+# Option A — API key:
+{:ok, session} = OddittApiClient.AuthSession.from_api_key("YOUR_API_KEY")
+
+# Option B — OAuth client credentials:
+# {:ok, session} =
+#   OddittApiClient.AuthSession.from_client_credentials("CLIENT_ID", "CLIENT_SECRET")
+
+conn = OddittApiClient.AuthSession.connection(session)
+{:ok, keys} = OddittApiClient.Api.Account.v1_account_api_keys_get(conn)
+```
+
 ## Configuration
 
 You can override the URL of your server (e.g. if you have a separate development and production server in your

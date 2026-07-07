@@ -21,3 +21,6 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+# Hand-written convenience auth layer (see lib/odditt_api_client/auth_session.ex). Preserve on regen.
+lib/odditt_api_client/auth_session.ex
