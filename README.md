@@ -33,13 +33,20 @@ a short-lived Bearer JWT (via `POST /v1/auth/login` or `POST /v1/oauth/login`) a
 refreshes it as needed. A session is a small process; call `connection/1` to get a
 `Tesla` connection carrying a valid Bearer token:
 
+Authenticate with an **API key**:
+
 ```elixir
-# Option A — API key:
 {:ok, session} = OddittApiClient.AuthSession.from_api_key("YOUR_API_KEY")
 
-# Option B — OAuth client credentials:
-# {:ok, session} =
-#   OddittApiClient.AuthSession.from_client_credentials("CLIENT_ID", "CLIENT_SECRET")
+conn = OddittApiClient.AuthSession.connection(session)
+{:ok, keys} = OddittApiClient.Api.Account.v1_account_api_keys_get(conn)
+```
+
+Or authenticate with **OAuth client credentials**:
+
+```elixir
+{:ok, session} =
+  OddittApiClient.AuthSession.from_client_credentials("CLIENT_ID", "CLIENT_SECRET")
 
 conn = OddittApiClient.AuthSession.connection(session)
 {:ok, keys} = OddittApiClient.Api.Account.v1_account_api_keys_get(conn)
