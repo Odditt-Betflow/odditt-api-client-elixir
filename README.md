@@ -13,6 +13,23 @@ mix do deps.get, compile
 
 ## Installation
 
+### From GitHub
+
+Add `odditt_api_client` as a git dependency in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:odditt_api_client, git: "https://github.com/Odditt-Betflow/odditt-api-client-elixir.git", branch: "main"}
+    # pin to a tag once available: tag: "v1.0.0"
+  ]
+end
+```
+
+Then run `mix deps.get`.
+
+### From Hex (once published)
+
 If [available in Hex][], the package can be installed by adding `odditt_api_client` to
 your list of dependencies in `mix.exs`:
 
